@@ -109,7 +109,7 @@
                     {% endif %}
                     <a href="{% url 'myapp.detail_urls:create_new_skpd' atm_detail|get_dict_item:'atm_pk' %}" class="btn btn-primary" role="button">New SKPD</a>
                     <a href="{% url 'myapp.detail_urls:edit_atm' atm_detail|get_dict_item:'atm_pk' %}" class="btn btn-info" role="button">Edit</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="ATM" data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_id' }}">Delete</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="ATM" data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Delete</button>
                 </div>
                 </div>
                 {% endwith %}
