@@ -121,7 +121,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="deleteModalLabel">Deleting SKPD</h4>
+            <h4 class="modal-title" id="deleteModalLabel"></h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -150,6 +150,7 @@
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
+        modal.find('.modal-title').text('Deleting '+inputtype)
         modal.find('.modal-body #question').text('Apakah Anda yakin akan menghapus '+inputtype+' - '+inputvalue+'?' )
         modal.find('.modal-footer #inputanBuatViewValue').val(inputvalue)
         modal.find('.modal-footer #inputanBuatViewType').val(inputtype)
