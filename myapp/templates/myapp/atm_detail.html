@@ -100,7 +100,7 @@
                                         {% if request.user|in_group:'Admin' and forloop.counter != skpd_list|length %}
                                             <td>
                                                 <a href="{% url 'myapp.detail_urls:edit_skpd' atm_detail|get_dict_item:'atm_pk' skpd.id %}" class="btn btn-info btn-xs" role="button">Ubah</a>
-                                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="SKPD" data-inputvaluemodal="{{ skpd.id }}">Hapus</button>
+                                                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="SKPD" data-popupvalue="{{ skpd.no_skpd }}" data-inputvaluemodal="{{ skpd.id }}">Hapus</button>
                                             </td>
                                         {% else %}
                                             <td>-</td>
@@ -116,7 +116,7 @@
                     {% if request.user|in_group:'Admin' %}
                         <a href="{% url 'myapp.detail_urls:create_new_skpd' atm_detail|get_dict_item:'atm_pk' %}" class="btn btn-primary" role="button">Tambah SKPD Baru</a>
                         <a href="{% url 'myapp.detail_urls:edit_atm' atm_detail|get_dict_item:'atm_pk' %}" class="btn btn-info" role="button">Ubah</a>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="ATM" data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Hapus</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="ATM" data-popupvalue="{{ atm_detail|get_dict_item:'atm_id' }}" data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Hapus</button>
                     {% endif %}
                 </div>
                 </div>
@@ -155,11 +155,12 @@
         var button = $(event.relatedTarget) // Button that triggered the modal
         var inputvalue = button.data('inputvaluemodal') // Extract info from data-* attributes
         var inputtype = button.data('inputtypemodal')
+        var popupvalue = button.data('popupvalue') //fix for incorrect modal value
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
         modal.find('.modal-title').text('Deleting '+inputtype)
-        modal.find('.modal-body #question').text('Apakah Anda yakin akan menghapus '+inputtype+' - '+inputvalue+'?' )
+        modal.find('.modal-body #question').text('Apakah Anda yakin akan menghapus '+inputtype+' - '+popupvalue+'?' )
         modal.find('.modal-footer #inputanBuatViewValue').val(inputvalue)
         modal.find('.modal-footer #inputanBuatViewType').val(inputtype)
       })
