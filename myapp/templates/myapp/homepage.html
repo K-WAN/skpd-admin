@@ -5,9 +5,11 @@
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/jquery.dataTables.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/bootstrap3.3.7.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/dot.css' %}">
         <script src="{% static 'myapp/js/jquery3.3.1.min.js' %}"></script>
         <script type="text/javascript" charset="utf8" src="{% static 'myapp/js/jquery.dataTables.js' %}"></script>
         <script type = "text/javascript" src="{% static 'myapp/js/datatable-unsort.js' %}"></script>
+        <script type = "text/javascript" src="{% static 'myapp/js/tooltip.js' %}"></script>
 
     </head>
 <body>
@@ -43,7 +45,11 @@
                     <td>{{ skpd.lokasi_pemasangan}}</td>
                     <td>{{ skpd.masa_berlaku_akhir }}</td>
                     <td>{{ ukuran.total }}</td>
-                    <td>{{ atm.is_active }}</td>
+                    {% if atm.is_active %}
+                        <td><span class="dotgreen" data-toggle="tooltip" title="Active"></span></td>
+                    {% else %}
+                        <td><span class="dotred" data-toggle="tooltip" title="Inactive"></span></td>                        
+                    {% endif %}
                 </tr>
                {% endfor %}
             </tbody>
@@ -52,8 +58,7 @@
             <a href="{% url 'myapp.home_urls:create_new_atm' %}" class="btn btn-info" role="button">Tambah ATM Baru</a>
         {% endif %}
     </div>
-    </div>
-
+    </div>    
 </body>
 
 </html>
