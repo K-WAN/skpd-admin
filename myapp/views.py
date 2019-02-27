@@ -8,6 +8,8 @@ from myapp.forms import ATMForm, SKPDForm
 from .models import ATM, SKPD, Ukuran
 from .templatetags.myapp_extras import in_group
 
+import json
+
 class HomepageView(LoginRequiredMixin, generic.ListView):
     template_name = 'myapp/homepage.html'
     context_object_name = 'homepage_list'
@@ -40,7 +42,8 @@ class ATMDetailView(LoginRequiredMixin, generic.DetailView):
             'lokasi_pemasangan': skpd_list[latest_skpd_idx].lokasi_pemasangan,
             'atm_id': atm.atm_id,
             'atm_pk': atm.id,
-            'skpd_list': skpd_list
+            'skpd_list': skpd_list,
+            'is_active': atm.is_active
         }
 
         return result_object
@@ -55,6 +58,11 @@ class ATMDetailView(LoginRequiredMixin, generic.DetailView):
                 atm = ATM.objects.get(pk=request.POST['value'])
                 atm.delete()
                 return redirect(reverse('myapp.home_urls:homepage'))
+            else:
+                atm = ATM.objects.get(pk=request.POST['value'])
+                atm.is_active = json.loads(request.POST['boolean'])
+                atm.save()
+                return redirect(reverse('myapp.detail_urls:detail', args=(pk,)))
 
 class ATMCreateNewView(LoginRequiredMixin, generic.FormView):
     form_class = ATMForm

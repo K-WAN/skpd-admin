@@ -55,7 +55,7 @@
             </tbody>
         </table>
         {% if request.user|in_group:'Admin' %}
-            <a href="{% url 'myapp.home_urls:create_new_atm' %}" class="btn btn-info" role="button">Tambah ATM Baru</a>
+            <a href="{% url 'myapp.home_urls:create_new_atm' %}" class="btn btn-primary" role="button">Tambah ATM Baru</a>
         {% endif %}
     </div>
     </div>    
