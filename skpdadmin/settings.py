@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,7 @@ MEDIA_URL = '/media/'
 LOGIN_URL = 'custom_login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+FORMAT_MODULE_PATH = [
+    'myapp.formats',
+]

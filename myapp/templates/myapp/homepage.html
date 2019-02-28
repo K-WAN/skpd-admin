@@ -43,7 +43,7 @@
                     <td><a href="{% url 'myapp.detail_urls:detail' skpd.atm.id %}"/>{{ atm.atm_id }}</td>
                     <td>{{ skpd.alamat_pemilik }}</td>
                     <td>{{ skpd.lokasi_pemasangan}}</td>
-                    <td>{{ skpd.masa_berlaku_akhir }}</td>
+                    <td>{{ skpd.masa_berlaku_akhir|date:"d-M-Y" }}</td>
                     <td>{{ ukuran.total }}</td>
                     {% if atm.is_active %}
                         <td><span class="dotgreen" data-toggle="tooltip" title="Active"></span></td>

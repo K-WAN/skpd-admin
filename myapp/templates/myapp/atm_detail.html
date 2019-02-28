@@ -39,7 +39,7 @@
 {% else %}
     <p>No atm data.</p>
 {% endif %} -->
-
+{% load humanize %}
 <!DOCTYPE html>
 <html lang = "en">
     <head>
@@ -51,17 +51,20 @@
         <script type="text/javascript" charset="utf8" src="{% static 'myapp/js/jquery.dataTables.js' %}"></script>
         <script type = "text/javascript" src="{% static 'myapp/js/datatable-unsort.js' %}"></script>
         <script src="{% static 'myapp/js/bootstrap.min.js' %}"></script>
-        <style>
-          h1 {text-align: center;}
-        </style>
-        <style>         
+        <style> 
+        h1 {text-align: center;}
+
         .wrapper {
-        display: grid;
-        grid-template-columns: 90px auto;        
+            display: grid;
+            grid-template-columns: 90px auto;        
         }
 
         .box1 {
-        margin-top: 7px;
+            margin-top: 7px;
+        }
+
+        .btnLabel {
+            pointer-events:none;
         }       
         </style>
     </head>
@@ -83,14 +86,14 @@
                     {% if atm_detail|get_dict_item:'is_active' is True %}     
                         <div class="box2">
                             <div class="btn-group-vertical">
-                                <button type="button" class="btn btn-success">Aktif</button>
+                                <button type="button" class="btn btn-success btnLabel">Aktif</button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="status" data-inputbooleanmodal=false data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Nonaktifkan</button>                    
                             </div>
                         </div>
                     {% elif atm_detail|get_dict_item:'is_active' is False %}                                        
                         <div class="box2">
                             <div class="btn-group-vertical">
-                                <button type="button" class="btn btn-danger">Tidak Aktif</button>
+                                <button type="button" class="btn btn-danger btnLabel">Tidak Aktif</button>
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="status" data-inputbooleanmodal=true data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Aktifkan</button>                    
                             </div>
                         </div>
@@ -118,10 +121,10 @@
                                 {% with comment=skpd.comment|if_none_or_empty:'-' %}
                                     <tr>
                                         <td>{{ forloop.counter }}.</td>
-                                        <td>{{ skpd.masa_berlaku_awal }}</td>
-                                        <td>{{ skpd.masa_berlaku_akhir }}</td>
+                                        <td>{{ skpd.masa_berlaku_awal|date:"d-M-Y" }}</td>
+                                        <td>{{ skpd.masa_berlaku_akhir|date:"d-M-Y" }}</td>
                                         <td>{{ comment }}</td>
-                                        <td>Rp{{ skpd.nilai_sewa }}</td>
+                                        <td>Rp {{ skpd.nilai_sewa|intcomma }}</td>
                                         {% if skpd.pdf_file %}
                                             <td><a href="{% url 'myapp.detail_urls:download_pdf_file' atm_detail|get_dict_item:'atm_pk' skpd.id skpd.pdf_file_name %}">{{ skpd.pdf_file_name }}</a></td>
                                         {% else %}
