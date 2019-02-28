@@ -16,6 +16,17 @@
   <meta charset = "urf-8" name = "viewport" content = "width=device-width, initial-scale=1"/>
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/bootstrap3.3.7.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/datepicker.css' %}">
+  <script src="{% static 'myapp/js/jquery3.3.1.min.js' %}"></script>
+  <script src="{% static 'myapp/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'myapp/js/bootstrap-datepicker.js' %}"></script>
+  <script type="text/javascript">
+    $(function(){
+      $('.datepicker').datepicker({
+          format: 'dd-mm-yyyy'
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -221,7 +232,7 @@
             {% if form.is_bound %}
               {% render_field form.masa_berlaku_awal class="form-control is-valid"%}
             {% else %}
-              {% render_field form.masa_berlaku_awal class="form-control" placeholder=form.masa_berlaku_awal.label %}
+              {% render_field form.masa_berlaku_awal class="form-control datepicker" placeholder=form.masa_berlaku_awal.label %}
             {% endif %}
           </div>
           <label class="col-md-1">s/d</label>
@@ -229,7 +240,7 @@
             {% if form.is_bound %}
               {% render_field form.masa_berlaku_akhir class="form-control is-valid"%}
             {% else %}
-              {% render_field form.masa_berlaku_akhir class="form-control" placeholder=form.masa_berlaku_akhir.label %}
+              {% render_field form.masa_berlaku_akhir class="form-control datepicker" placeholder=form.masa_berlaku_akhir.label %}
             {% endif %}
           </div>
         </div>
