@@ -54,6 +54,16 @@
         <style>
           h1 {text-align: center;}
         </style>
+        <style>         
+        .wrapper {
+        display: grid;
+        grid-template-columns: 90px auto;        
+        }
+
+        .box1 {
+        margin-top: 7px;
+        }       
+        </style>
     </head>
     <body>
         <nav class = "navbar navbar-default" >
@@ -68,12 +78,24 @@
                 <h1 class = "text-primary">{{ atm_detail|get_dict_item:'lokasi_pemasangan' }}</h1>
                 <h1 class = "text-primary">{{ atm_detail|get_dict_item:'atm_id' }}</h1>
                 <div class = "pull-right form-group">
-                    Status ATM :                     
-                    {% if atm_detail|get_dict_item:'is_active' is True %}
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="status" data-inputbooleanmodal=false data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Aktif</button>                        
-                    {% elif atm_detail|get_dict_item:'is_active' is False %}
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="status" data-inputbooleanmodal=true data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Tidak Aktif</button>
-                    {% endif %}
+                    <div class="wrapper">
+                        <div class="box1">Status ATM:</div>
+                    {% if atm_detail|get_dict_item:'is_active' is True %}     
+                        <div class="box2">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-success">Aktif</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="status" data-inputbooleanmodal=false data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Nonaktifkan</button>                    
+                            </div>
+                        </div>
+                    {% elif atm_detail|get_dict_item:'is_active' is False %}                                        
+                        <div class="box2">
+                            <div class="btn-group-vertical">
+                                <button type="button" class="btn btn-danger">Tidak Aktif</button>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#deleteModal" data-inputtypemodal="status" data-inputbooleanmodal=true data-inputvaluemodal="{{ atm_detail|get_dict_item:'atm_pk' }}">Aktifkan</button>                    
+                            </div>
+                        </div>
+                    {% endif %}                    
+                    </div>
                 </div>
 
                 {% with skpd_list=atm_detail|get_dict_item:'skpd_list' %}
