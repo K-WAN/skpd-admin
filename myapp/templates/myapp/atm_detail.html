@@ -121,8 +121,8 @@
                                 {% with comment=skpd.comment|if_none_or_empty:'-' %}
                                     <tr>
                                         <td>{{ forloop.counter }}.</td>
-                                        <td>{{ skpd.masa_berlaku_awal|date:"d-M-Y" }}</td>
-                                        <td>{{ skpd.masa_berlaku_akhir|date:"d-M-Y" }}</td>
+                                        <td>{{ skpd.masa_berlaku_awal|date:"d-m-Y" }}</td>
+                                        <td>{{ skpd.masa_berlaku_akhir|date:"d-m-Y" }}</td>
                                         <td>{{ comment }}</td>
                                         <td>Rp {{ skpd.nilai_sewa|intcomma }}</td>
                                         {% if skpd.pdf_file %}
