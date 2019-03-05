@@ -16,6 +16,7 @@
       });
     });
   </script>
+  <title>{{title_prefix}} {{atm_id}} | SKPD-ADMIN</title>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
 
   <div class = "container">
   <div class = "col-md-auto well">
-      <h3 class = "text">Tambah ATM baru:</h3>
+      <h3 class = "text">{{title_prefix}}</h3>
       <hr style = "border-top:1px dotted #000;"/>
 
       <form method="post" enctype="multipart/form-data">{% csrf_token %}

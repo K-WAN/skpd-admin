@@ -72,7 +72,7 @@ class ATMCreateNewView(LoginRequiredMixin, generic.FormView):
     redirect_field_name = None
 
     def get_context_data(self, **kwargs):
-        kwargs['title_prefix'] = "Add New"
+        kwargs['title_prefix'] = "Tambah ATM Baru"
         return super().get_context_data(**kwargs)
 
     def create_new_ATM(self, data):
@@ -204,8 +204,9 @@ def edit_ATM(request, pk):
             form = ATMForm(initial=initial_data)
 
         context = {
-            'title_prefix': "Edit",
-            'form': form
+            'title_prefix': "Ubah ATM",
+            'form': form,
+            'atm_id': atm.atm_id
         }
 
         return render(request, 'myapp/atm_form.html', context)
@@ -227,7 +228,7 @@ class SKPDCreateNewView(LoginRequiredMixin, generic.FormView):
         return context
 
     def get_context_data(self, **kwargs):
-        kwargs['title_prefix'] = "Add New"
+        kwargs['title_prefix'] = "Tambah SKPD Baru"
         kwargs['atm_detail'] = self.get_atm_detail_context()
         return super().get_context_data(**kwargs)
 
@@ -355,13 +356,14 @@ def edit_SKPD(request, pk, pk_skpd):
             form = SKPDForm(initial=initial_data)
 
         context = {
-            'title_prefix': "Edit",
+            'title_prefix': "Ubah SKPD",
             'atm_detail': {
                 'tempat_pemasangan': skpd.tempat_pemasangan,
                 'lokasi_pemasangan': skpd.lokasi_pemasangan,
-                'atm_id': skpd.atm.atm_id
+                'atm_id': skpd.atm.atm_id                
             },
-            'form': form
+            'form': form,
+            'no_skpd': skpd.no_skpd
         }
 
         return render(request, 'myapp/skpd_form.html', context)
